@@ -1,0 +1,35 @@
+<div w-bind="./index">
+    Test Ajax Call
+    <button type="button"
+        w-onClick="makeXhrCall">
+        Do Xhr Request
+    </button>
+
+    <button type="button"
+        w-onClick="makeXhrHeadersCall">
+        Do Xhr Get Headers
+    </button>
+
+    <button type="button"
+        w-onClick="makeXhrPostCall">
+        Do Xhr Post Request
+    </button>
+
+    <button type="button"
+        w-onClick="makeXhrPutCall">
+        Do Xhr Put Request
+    </button>
+
+    <button type="button"
+        w-onClick="makeXhrPatchCall">
+        Do Xhr Patch Request
+    </button>
+
+    <div>
+        total time: ${data.time} ms
+    </div>
+    <div id="xhr-response">
+        ${data.response}
+    </div>
+
+</div>

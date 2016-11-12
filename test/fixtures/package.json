@@ -1,0 +1,8 @@
+{
+  "name": "testapp",
+  "version": "1.0.0",
+  "description": "sample app using Express and Kraken 1.0",
+  "main": "index.js",
+  "dependencies": {
+  }
+}

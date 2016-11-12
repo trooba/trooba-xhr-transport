@@ -10,12 +10,13 @@ var httpfy = require('trooba-http-api');
 module.exports = function xhrTransportFactory(config) {
 
     function xhr(requestContext, responseContext) {
-        var options = Utils.mixin(config,
+        requestContext.options = Utils.mixin(config,
             requestContext.options, {});
 
-        invoke(options, function onResponse(err, response) {
+        invoke(requestContext.options, function onResponse(err, response) {
             responseContext.error = err;
             if (response) {
+                Utils.deserializeResponseHeaders(response);
                 responseContext.statusCode = response.statusCode;
                 responseContext.response = response;
             }
@@ -32,7 +33,6 @@ function invoke(options, callback) {
     var err;
 
     var url = Utils.options2Url(options);
-
     var _isChunked = false;
     var resHeaders;
     var config = {
@@ -90,7 +90,8 @@ function invoke(options, callback) {
         method: options.method || 'GET', // String. The type of request to make (e.g. 'POST', 'GET', 'PUT'); default is 'GET'
         headers: headers,
         data: typeof options.body === 'string' ?
-            options.body : options.body !== undefined ? JSON.stringify(options.body) : undefined,
+            options.body : options.body !== undefined ?
+                httpfy.Utils.stringifyQuery(options.body) : undefined,
         delimiter: options.delimiter
     };
 
@@ -133,10 +134,10 @@ var Utils = {
             (options.port ? (':' + options.port) : '') +
             (options.basepath ? '/' + this.unslash(options.basepath) : '') +
             (options.path ? '/' + this.unslash(options.path) : '') +
-            (options.qs ? Object.keys(options.qs).reduce(function reduce(memo, key) {
-                return memo + (memo ? '&' : '?') +
-                    (key + '=' + encodeURIComponent(options.qs[key]));
-            }, '') : '');
+            (options.search ?
+                '?' + (typeof options.search === 'string' ?
+                    options.search :
+                    httpfy.Utils.stringifyQuery(options.search)) : '');
     },
 
     unslash: function unslash(path) {
@@ -165,6 +166,19 @@ var Utils = {
             return target;
         }
         return src || target;
+    },
+
+    deserializeResponseHeaders: function deserializeResponseHeaders(response) {
+        if (response && response.headers && typeof response.headers === 'string') {
+            response.headers = response.headers.split(/\n/)
+                .reduce(function reduce(memo, kvp) {
+                    var parts = kvp.split(':');
+                    if (parts.length > 1) {
+                        memo[parts.shift().trim()] = parts.join(':').trim();
+                    }
+                    return memo;
+                }, {});
+        }
     }
 };
 

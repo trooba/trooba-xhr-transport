@@ -1,0 +1,7 @@
+{
+    "dependencies": [
+        "require trooba-http-api",
+        "./../components/app-ajax",
+        "require marko-widgets"
+    ]
+}
