@@ -10,10 +10,10 @@ var httpfy = require('trooba-http-api');
 module.exports = function xhrTransportFactory(config) {
 
     function xhr(requestContext, responseContext) {
-        requestContext.options = Utils.mixin(config,
-            requestContext.options, {});
+        requestContext.request = Utils.mixin(config,
+            requestContext.request, {});
 
-        invoke(requestContext.options, function onResponse(err, response) {
+        invoke(requestContext.request, function onResponse(err, response) {
             responseContext.error = err;
             if (response) {
                 Utils.deserializeResponseHeaders(response);
