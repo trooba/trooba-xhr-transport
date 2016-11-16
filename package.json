@@ -37,6 +37,7 @@
     "marko-widgets": "^5.3.7",
     "mocha": "^3.1.2",
     "shelljs": "^0.7.5",
+    "sinon": "^1.17.6",
     "supertest": "^2.0.1",
     "trooba": "file:../trooba",
     "zombie": "^5.0.4"
