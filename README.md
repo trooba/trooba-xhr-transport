@@ -15,8 +15,7 @@ var xhrTransportFactory = require('trooba-xhr-transport');
 require('trooba')
     .transport(xhrTransportFactory, {
         protocol: 'http:',
-        hostname: 'www.google.com',
-        connectTimeout: 100,
+        hostname: 'www.google.com'
         socketTimeout: 1000
     })
     .create()
