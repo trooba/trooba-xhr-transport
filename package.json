@@ -39,11 +39,11 @@
     "shelljs": "^0.7.5",
     "sinon": "^1.17.6",
     "supertest": "^2.0.1",
-    "trooba": "^0",
+    "trooba": "^1",
     "zombie": "^5.0.4"
   },
   "dependencies": {
     "jsonpipe": "^2.1.1",
-    "trooba-http-api": "^1"
+    "trooba-http-api": "^2"
   }
 }

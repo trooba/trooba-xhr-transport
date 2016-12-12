@@ -7,21 +7,23 @@ var httpfy = require('trooba-http-api');
 /**
  * Ajax/XHR trooba transort for browser side service calls
 */
-module.exports = function xhrTransportFactory(config) {
+module.exports = function xhr(pipe, config) {
+    pipe.on('request', function onRequest(request) {
+        request = Utils.mixin(config,
+            request, {});
 
-    function xhr(requestContext, reply) {
-        requestContext.request = Utils.mixin(config,
-            requestContext.request, {});
-
-        invoke(requestContext.request, function onResponse(err, response) {
-            if (response) {
-                Utils.deserializeResponseHeaders(response);
+        invoke(request, function onResponse(err, response) {
+            if (err) {
+                pipe.throw(err);
+                return;
             }
-            reply(err, response);
-        });
-    }
 
-    return httpfy(xhr);
+            Utils.deserializeResponseHeaders(response);
+            pipe.respond(response);
+        });
+    });
+
+    httpfy(pipe);
 };
 
 function invoke(options, callback) {
