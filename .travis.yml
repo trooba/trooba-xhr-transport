@@ -3,5 +3,11 @@ node_js:
 - "6"
 - "7"
 language: node_js
-script: "npm test"
 env: DEBUG=zombie
+install:
+- npm install
+- npm install -g codecov istanbul
+script:
+- npm test
+- istanbul cover ./node_modules/.bin/mocha --report lcovonly -- -R spec
+- codecov
