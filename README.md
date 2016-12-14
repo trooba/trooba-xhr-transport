@@ -41,5 +41,6 @@ require('trooba')
     });
 ```
 
-For a real browser example, take a look at [unit test](test/browser.js)
+For a real browser example, take a look at [unit test](test/browser.js).
+
 It uses lasso-js and marko-js to bundle resources into browser including trooba xhr implementation. 
