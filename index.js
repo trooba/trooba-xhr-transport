@@ -155,7 +155,7 @@ var Utils = {
     },
 
     mixin: function mixin(src, target) {
-        if (src && typeof src === 'object') {
+        if (src && typeof src === 'object' && target && typeof target === 'object') {
             target = target || {};
             Object.keys(src).forEach(function (key) {
                 var srcVal = src[key];

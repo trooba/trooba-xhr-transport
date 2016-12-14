@@ -88,6 +88,24 @@ describe(__filename, function () {
             arr: [1, 2, 3]
         }, result);
 
+        result = Utils.mixin(src, {
+            foo: 'bar1',
+            dfg: 'asd',
+            qaz: {
+                das: 'rgh1',
+                asd: 'azx'
+            },
+            arr: 4
+        });
+        Assert.deepEqual({
+            foo: 'bar',
+            dfg: 'asd',
+            qaz: {
+                das: 'rgh',
+                asd: 'azx'
+            },
+            arr: [1, 2, 3]
+        }, result);
     });
 
     it('should deserializeResponseHeaders', function () {
