@@ -7,7 +7,7 @@
 
 XHR transport for trooba pipeline to make CORS RESTful service calls from the browser.
 
-# Get Involved
+## Get Involved
 
 - **Contributing**: Pull requests are welcome!
     - Read [`CONTRIBUTING.md`](.github/CONTRIBUTING.md) and check out our [bite-sized](https://github.com/trooba/trooba-xhr-transport/issues?q=is%3Aissue+is%3Aopen+label%3Adifficulty%3Abite-sized) and [help-wanted](https://github.com/trooba/trooba-xhr-transport/issues?q=is%3Aissue+is%3Aopen+label%3Astatus%3Ahelp-wanted) issues
