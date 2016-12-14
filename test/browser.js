@@ -111,7 +111,6 @@ describe(__filename, function() {
 
             validateXhr(function validate(ctx) {
                 var text = ctx.browser.html('#xhr-response');
-                console.log(text)
                 Assert.ok(text.
                     indexOf('"x-foo":"x-bar","x-qaz":"x-wsx"') !== -1);
                 Assert.equal(1, ctx.countAjaxRequests);

@@ -1,16 +1,7 @@
 node_js:
-- "0.10"
-- "0.12"
 - "4"
 - "6"
 - "7"
 language: node_js
-dist: trusty
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
 script: "npm test"
-sudo: false
+env: DEBUG=zombie
