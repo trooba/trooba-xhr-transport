@@ -24,14 +24,14 @@ npm install trooba-xhr-transport --save
 ## Usage
 
 ```js
-var xhrTransportFactory = require('trooba-xhr-transport');
+var xhrTransport = require('trooba-xhr-transport');
 require('trooba')
-    .transport(xhrTransportFactory, {
+    .use(xhrTransport, {
         protocol: 'http:',
         hostname: 'www.google.com'
         socketTimeout: 1000
     })
-    .create()
+    .build('client:default')
     .get({
         q: 'nike'
     })
