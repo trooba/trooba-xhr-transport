@@ -32,7 +32,7 @@ module.exports = require('marko-widgets').defineComponent({
 
     makeAjax: function(type, options) {
         var self = this;
-        var client = Trooba.transport(xhrTransport, this.state.endpoint).create();
+        var client = Trooba.use(xhrTransport, this.state.endpoint).build('client:default');
         var st = Date.now();
         options = options || {};
         var method = options.method || 'get';

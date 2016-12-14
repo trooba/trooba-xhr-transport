@@ -9,6 +9,8 @@ var App = require('./fixtures');
 var Shelljs = require('shelljs');
 var Browser = require('zombie');
 var xhrTransportFactory = require('..');
+var Dns = require('dns');
+var _lookup = Dns.lookup;
 
 describe(__filename, function() {
     var _cwd;
@@ -19,6 +21,14 @@ describe(__filename, function() {
 
     before(function (next) {
         this.timeout(120000);
+
+        Dns.lookup = function (host, some, cb) {
+            if (host === 'www.test.fake-xyz.com') {
+                cb(null, '127.0.0.1', 4);
+                return;
+            }
+            _lookup.apply(Dns, arguments);
+        };
 
         _cwd = process.cwd();
         var root = __dirname + '/fixtures';
@@ -32,6 +42,7 @@ describe(__filename, function() {
 
     after(function() {
         process.chdir(_cwd);
+        Dns.lookup = _lookup;
     });
 
     it('should expose service client into browser', function(done) {
@@ -111,7 +122,6 @@ describe(__filename, function() {
 
             validateXhr(function validate(ctx) {
                 var text = ctx.browser.html('#xhr-response');
-                console.log(text)
                 Assert.ok(text.
                     indexOf('"x-foo":"x-bar","x-qaz":"x-wsx"') !== -1);
                 Assert.equal(1, ctx.countAjaxRequests);
