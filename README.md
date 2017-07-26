@@ -31,7 +31,8 @@ require('trooba')
         hostname: 'www.google.com'
         socketTimeout: 1000
     })
-    .build('client:default')
+    .build()
+    .create('client:default')
     .get({
         q: 'nike'
     })
