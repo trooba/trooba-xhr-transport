@@ -100,6 +100,20 @@ describe(__filename, function() {
             });
         });
 
+        it('should do full xhr flow with origin all in browser', function(done) {
+            this.timeout(30000);
+
+            validateXhr(function validate(ctx) {
+                Assert.equal('<div id="xhr-response">{"message":"hello world"}</div>',
+                    ctx.browser.html('#xhr-response'));
+                Assert.equal(1, ctx.countAjaxRequests);
+                done();
+            }, {
+                buttonName: 'Do Xhr Origin All Request',
+                originHost: 'www.some.other.com'
+            });
+        });
+
         it('should format url', function () {
             var url = xhrTransportFactory.Utils.options2Url({
                 method: 'GET',
@@ -237,7 +251,7 @@ function validateXhr(validateFn, options) {
                 _next();
                 _next = function noop() {};
             };
-            Browser.localhost('www.test.fake-xyz.com', 7000);
+            Browser.localhost(options.originHost || 'www.test.fake-xyz.com', 7000);
             var browser = ctx.browser = new Browser();
             browser.debug = true;
             browser.on('xhr', function (event) {

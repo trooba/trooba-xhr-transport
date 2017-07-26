@@ -104,6 +104,15 @@ module.exports = require('marko-widgets').defineComponent({
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         });
+    },
+
+    makeXhrOriginAllCall: function(event) {
+        console.log('Making Xhr OriginAll service call...');
+        this.makeAjax('xhr', {
+            params: {
+                originAll: '*'
+            }
+        });
     }
 
 });

@@ -5,7 +5,12 @@ module.exports = function json(req, res) {
         return;
     }
 
-    res.header('Access-Control-Allow-Origin', 'http://www.test.fake-xyz.com');
+    if (req.query.originAll) {
+        res.header('Access-Control-Allow-Origin', req.query.originAll);
+    }
+    else {
+        res.header('Access-Control-Allow-Origin', 'http://www.test.fake-xyz.com');
+    }
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Headers', 'X-Requested-With, Access-Control-Allow-Origin');
     res.header('Access-Control-Expose-Headers', 'X-Firefox-Spdy, Transfer-Encoding');
