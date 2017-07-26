@@ -88,6 +88,7 @@ function invoke(options, callback) {
         timeout: options.socketTimeout, // Number. Set a timeout (in milliseconds) for the request
         method: options.method || 'GET', // String. The type of request to make (e.g. 'POST', 'GET', 'PUT'); default is 'GET'
         headers: headers,
+        withCredentials: options.withCredentials,
         data: typeof options.body === 'string' ?
             options.body : options.body !== undefined ?
                 httpfy.Utils.stringifyQuery(options.body) : undefined,
