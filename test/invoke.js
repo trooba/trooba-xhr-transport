@@ -47,6 +47,19 @@ describe(__filename, function() {
             }));
         });
 
+        it('should process 204 response with no content', function(done) {
+            var xhr = Service.invoke(requestOptions, function (err, res) {
+                assert.ok(!err, err);
+                assert.equal(204, res.statusCode);
+                assert.equal(undefined, res.body);
+                done();
+            });
+
+            xhr.respond(204, {
+                "Content-Type": "application/json"
+            });
+        });
+
         it('should process a JSON response with 1 chunk and ending with \\n\\n', function(done) {
             var count = 1;
             var xhr = Service.invoke(requestOptions, function (err, res) {
