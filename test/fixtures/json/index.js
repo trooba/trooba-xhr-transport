@@ -5,8 +5,8 @@ module.exports = function json(req, res) {
         return;
     }
 
-    if (req.query.originAll) {
-        res.header('Access-Control-Allow-Origin', req.query.originAll);
+    if (req.query.originAll || req.body && req.body.originAll) {
+        res.header('Access-Control-Allow-Origin', req.query.originAll || req.body.originAll);
     }
     else {
         res.header('Access-Control-Allow-Origin', 'http://www.test.fake-xyz.com');
@@ -30,6 +30,11 @@ module.exports = function json(req, res) {
     var model = {
         message: 'hello world'
     };
+
+    if (req.query.reply204 || req.body && req.body.reply204) {
+        res.status(204).end();
+        return;
+    }
 
     if (/POST|PUT|PATCH/.test(req.method)) {
         res.json(req.body);

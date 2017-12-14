@@ -114,6 +114,20 @@ describe(__filename, function() {
             });
         });
 
+        it('should handle 204 response with no body from POST request', function(done) {
+            this.timeout(30000);
+
+            validateXhr(function validate(ctx) {
+                Assert.equal('<div id="xhr-response">204</div>',
+                    ctx.browser.html('#xhr-response'));
+                Assert.equal(1, ctx.countAjaxRequests);
+                done();
+            }, {
+                buttonName: 'Do Xhr 204 Request',
+                originHost: 'www.some.other.com'
+            });
+        });
+
         it('should format url', function () {
             var url = xhrTransportFactory.Utils.options2Url({
                 method: 'GET',
