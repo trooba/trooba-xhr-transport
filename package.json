@@ -14,6 +14,9 @@
     "type": "git",
     "url": "git+https://github.com/trooba/trooba-xhr-transport.git"
   },
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org"
+  },
   "keywords": [
     "ajax",
     "trooba",
