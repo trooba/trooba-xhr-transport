@@ -1,9 +1,7 @@
 # ChangeLog
 
-## v2.0.2
-Fixed: the handler fails to handle 2XX responses
-
 ## v2.0.1
+Fixed: the handler fails to handle 2XX responses
 Fixed: Should allow different origin when allow origin is *
 
 ## v2.0.0
