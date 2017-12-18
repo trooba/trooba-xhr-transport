@@ -76,6 +76,14 @@ function invoke(options, callback) {
             if (err) {
                 return callback(err);
             }
+            // 3XX responses are treated as error by jsonpipe
+            if (xhr && (xhr.status > 200 && xhr.status < 300)) {
+                resHeaders = resHeaders || (xhr.getAllResponseHeaders() || '');
+                callback(null, {
+                    statusCode: xhr.status,
+                    headers: resHeaders
+                });
+            }
             // only do second callback when it is chunked
             if (_isChunked) {
                 callback(null, {

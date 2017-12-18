@@ -54,6 +54,9 @@ module.exports = require('marko-widgets').defineComponent({
             else if (!res) {
                 self.setState('response', 'ERROR: unknown');
             }
+            else if (res.statusCode > 200 && res.statusCode < 300) {
+                self.setState('response', res.statusCode);
+            }
             else {
                 self.setState('response', JSON.stringify(res.body));
             }
@@ -83,6 +86,17 @@ module.exports = require('marko-widgets').defineComponent({
         console.log('Making Xhr Post service call...');
         this.makeAjax('xhr', {
             method: 'post'
+        });
+    },
+
+    makeXhr204Call: function(event) {
+        console.log('Making Xhr 204 service call...');
+        this.makeAjax('xhr', {
+            method: 'post',
+            params: {
+                reply204: 'true',
+                originAll: '*'
+            }
         });
     },
 
